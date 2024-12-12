@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, make_response, render_template, sessi
 
 app = Flask(__name__)
 
-@app.route("/add?a=<x>&b=<y>")
+@app.route("/add/a=<x>&b=<y>", methods=["POST"])
 def add(x, y):
     """Funkce pro scitani dvou cisel.
     
@@ -27,13 +27,15 @@ def add(x, y):
     11
     """
     
-    if x.isalpha():
-        if y.isalpha():
-            return "Pouzijte argumenty typu int."
+    try:
+        x = int(x)
+        y = int(y)
+    except:
+        return "Pouzijte argumenty typu int."
         
-    return x+y
+    return str(x+y)
 
-@app.route("/subtract?a=<x>&b=<y>")
+@app.route("/subtract/a=<x>&b=<y>", methods=["POST"])
 def sub(x, y):
     """Funkce pro nasobeni dvou cisel.
     
@@ -57,13 +59,15 @@ def sub(x, y):
     70
     """
     
-    if x.isalpha():
-        if y.isalpha():
-            return "Pouzijte argumenty typu int."
+    try:
+        x = int(x)
+        y = int(y)
+    except:
+        return "Pouzijte argumenty typu int."
     
-    return x-y
+    return str(x-y)
 
-@app.route("/multiply?a=<x>&b=<y>")
+@app.route("/multiply/a=<x>&b=<y>", methods=["POST"])
 def mul(x, y):
     """Funkce pro nasobeni cisla <a> cislem <b>.
     
@@ -87,13 +91,15 @@ def mul(x, y):
     70
     """
     
-    if x.isalpha():
-        if y.isalpha():
-            return "Pouzijte argumenty typu int."    
+    try:
+        x = int(x)
+        y = int(y)
+    except:
+        return "Pouzijte argumenty typu int."  
     
-    return x*y
+    return str(x*y)
 
-@app.route("/divide?a=<x>&b=<y>")
+@app.route("/divide/a=<x>&b=<y>", methods=["POST"])
 def div(x, y):
     """Funkce pro deleni cisla <a> cislem <b>.
     
@@ -118,14 +124,16 @@ def div(x, y):
     >>> add(70, 10)
     7
     """
-    if x.isalpha():
-        if y.isalpha():
-            return "Pouzijte argumenty typu int."
+    try:
+        x = int(x)
+        y = int(y)
+    except:
+        return "Pouzijte argumenty typu int."
         
     if y == 0:
         return False
     else:
-        return (x/y)
+        return str(x/y)
 
 # každá funkce popis v docstringu NumPy
 # v dosctringu příklady použití (otestovat modulem doctest)
